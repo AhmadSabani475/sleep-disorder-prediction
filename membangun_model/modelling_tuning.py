@@ -8,11 +8,11 @@ import dagshub
 import matplotlib.pyplot as plt
 
 
-# mlflow.set_tracking_uri("http://127.0.0.1:8000/")
-# mlflow.set_experiment("Ekperiment_modelling_tuning")
+mlflow.set_tracking_uri("http://127.0.0.1:8000/")
+mlflow.set_experiment("Eksperimen_Sleep_Disorder")
 
 dagshub.init(repo_owner='AhmadSabani475', repo_name='Eksperimen_SML_Ahmad-Rizki-Sabani', mlflow=True)
-mlflow.set_experiment("Eksperimen_modelling_tuning")
+mlflow.set_experiment("Eksperimen_Sleep_Disorder")
 df = pd.read_csv('data_preprocessing.csv')
 X = df.drop(columns=['Sleep Disorder'])
 y = df['Sleep Disorder']
@@ -27,7 +27,7 @@ param_grid = {
     'min_samples_split' : [2, 5, 10]
 }
 
-with mlflow.start_run():
+with mlflow.start_run(run_name='RF_Tuned'):
     grid_search = GridSearchCV(
         RandomForestClassifier(random_state=42),
         param_grid,
